@@ -1,0 +1,16 @@
+package.xml
+setup.cfg
+setup.py
+../../build/dobot_gesture_control/dobot_gesture_control.egg-info/PKG-INFO
+../../build/dobot_gesture_control/dobot_gesture_control.egg-info/SOURCES.txt
+../../build/dobot_gesture_control/dobot_gesture_control.egg-info/dependency_links.txt
+../../build/dobot_gesture_control/dobot_gesture_control.egg-info/entry_points.txt
+../../build/dobot_gesture_control/dobot_gesture_control.egg-info/requires.txt
+../../build/dobot_gesture_control/dobot_gesture_control.egg-info/top_level.txt
+../../build/dobot_gesture_control/dobot_gesture_control.egg-info/zip-safe
+dobot_gesture_control/__init__.py
+dobot_gesture_control/gesture_listener.py
+resource/dobot_gesture_control
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

@@ -1,0 +1,3 @@
+[console_scripts]
+gesture_listener = debot_gesture_control.gesture_listener:main
+
