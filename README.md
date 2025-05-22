@@ -13,22 +13,26 @@
 ## 🧱 시스템 구조 개요
 
 ### 데이터 흐름
-[사용자 손 제스처 인식]
-↓
-[Windows]
-└─ MediaPipe 기반 제스처 분류 (1~4)
-└─ 웹소켓으로 리눅스에 전송
-↓
-[Linux]
-└─ 웹소켓 수신 노드 (ROS2 Bridge)
-└─ ROS2 토픽으로 제스처 전달 (/gesture_cmd)
-└─ 제어 노드에서 두봇 및 컨베이어 동작 명령 발행
-↓
-[Dobot Magician / Conveyor]
-└─ 제스처에 따른 실시간 반응
-↓
-[웹 대시보드 (선택)]
-└─ 로봇 및 컨베이어 상태 시각화
+
+```
+[사용자 손 제스처 인식]  
+      ↓  
+[Windows]  
+  └─ MediaPipe 기반 제스처 분류 (1~4)  
+  └─ 웹소켓으로 리눅스에 전송  
+      ↓  
+[Linux]  
+  └─ 웹소켓 수신 노드 (ROS2 Bridge)  
+  └─ ROS2 토픽으로 제스처 전달 (/gesture_cmd)  
+  └─ 제어 노드에서 두봇 및 컨베이어 동작 명령 발행  
+      ↓  
+[Dobot Magician / Conveyor]  
+  └─ 제스처에 따른 실시간 반응  
+      ↓  
+[웹 대시보드 (선택)]  
+  └─ 로봇 및 컨베이어 상태 시각화  
+```
+
 ---
 
 ## 🔧 주요 기술 구성 요소
@@ -79,29 +83,32 @@
 
 ## ✅ 기대 결과
 
-- 손의 간단한 제스처로 두봇의 이동 및 그리퍼 동작 제어 가능
-- 로봇 제어와 컨베이어 제어가 매끄럽게 연동됨
-- 향후 웹 대시보드를 통해 상태 모니터링 및 수동 제어 확장 가능
+- 손의 간단한 제스처로 두봇의 이동 및 그리퍼 동작 제어 가능  
+- 로봇 제어와 컨베이어 제어가 매끄럽게 연동됨  
+- 향후 웹 대시보드를 통해 상태 모니터링 및 수동 제어 확장 가능  
 
 ---
 
 ## 📁 디렉토리 구조 (예시)
+
+```
 project/
 ├── ros2_ws/
-│ └── src/
-│ ├── gesture_bridge_node/
-│ ├── dobot_controller_node/
-│ └── conveyor_controller_node/
+│   └── src/
+│       ├── gesture_bridge_node/
+│       ├── dobot_controller_node/
+│       └── conveyor_controller_node/
 ├── mediapipe_gesture/
-│ └── gesture_sender.py # 웹소켓 송신
-├── web_dashboard/ # 선택
-│ ├── app.py (Flask)
-│ └── static/
+│   └── gesture_sender.py  # 웹소켓 송신
+├── web_dashboard/         # 선택
+│   ├── app.py (Flask)
+│   └── static/
+```
 
 ---
 
 ## 📌 주의사항
 
-- MediaPipe는 Windows 환경에서만 실행하며, ROS2는 Linux에서 실행합니다.
-- 두 시스템은 **웹소켓을 통해 연결**되며, 최소한의 지연으로 명령을 전달할 수 있도록 최적화해야 합니다.
+- MediaPipe는 Windows 환경에서만 실행하며, ROS2는 Linux에서 실행합니다.  
+- 두 시스템은 **웹소켓을 통해 연결**되며, 최소한의 지연으로 명령을 전달할 수 있도록 최적화해야 합니다.  
 - ROS2에서 Dobot 및 컨베이어를 실시간으로 제어하기 위해, 각 노드는 비동기 방식으로 설계됩니다.
