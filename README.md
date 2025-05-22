@@ -88,10 +88,10 @@
 ## 📁 디렉토리 구조 (예시)
 project/
 ├── ros2_ws/
-│ ├── src/
-│ │ ├── gesture_bridge_node/
-│ │ ├── dobot_controller_node/
-│ │ └── conveyor_controller_node/
+│ └── src/
+│ ├── gesture_bridge_node/
+│ ├── dobot_controller_node/
+│ └── conveyor_controller_node/
 ├── mediapipe_gesture/
 │ └── gesture_sender.py # 웹소켓 송신
 ├── web_dashboard/ # 선택
