@@ -1,0 +1,36 @@
+[0.482s] Invoking command in '/home/ssafy/final_ws/src/dobot_gesture_control': PYTHONPATH=/home/ssafy/final_ws/build/dobot_gesture_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/dobot_gesture_control build --build-base /home/ssafy/final_ws/build/dobot_gesture_control/build install --record /home/ssafy/final_ws/build/dobot_gesture_control/install.log --single-version-externally-managed install_data
+[0.668s] running egg_info
+[0.668s] creating ../../build/dobot_gesture_control/dobot_gesture_control.egg-info
+[0.668s] writing manifest file '../../build/dobot_gesture_control/dobot_gesture_control.egg-info/SOURCES.txt'
+[0.670s] writing manifest file '../../build/dobot_gesture_control/dobot_gesture_control.egg-info/SOURCES.txt'
+[0.670s] running build
+[0.670s] running build_py
+[0.670s] creating /home/ssafy/final_ws/build/dobot_gesture_control/build
+[0.670s] creating /home/ssafy/final_ws/build/dobot_gesture_control/build/lib
+[0.670s] creating /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+[0.670s] copying dobot_gesture_control/conveyor_controller_node.py -> /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+[0.670s] copying dobot_gesture_control/gesture_ptp_move.py -> /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+[0.670s] copying dobot_gesture_control/realsense_yolo_sorter.py -> /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+[0.670s] copying dobot_gesture_control/gesture_bridge_node.py -> /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+[0.670s] copying dobot_gesture_control/__init__.py -> /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+[0.670s] running install
+[0.671s] running install_lib
+[0.671s] creating /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control
+[0.672s] byte-compiling /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control/conveyor_controller_node.py to conveyor_controller_node.cpython-310.pyc
+[0.672s] byte-compiling /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control/gesture_ptp_move.py to gesture_ptp_move.cpython-310.pyc
+[0.673s] byte-compiling /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control/realsense_yolo_sorter.py to realsense_yolo_sorter.cpython-310.pyc
+[0.674s] byte-compiling /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control/gesture_bridge_node.py to gesture_bridge_node.cpython-310.pyc
+[0.674s] byte-compiling /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control/__init__.py to __init__.cpython-310.pyc
+[0.674s] running install_data
+[0.674s] creating /home/ssafy/final_ws/install/dobot_gesture_control/share/ament_index
+[0.674s] creating /home/ssafy/final_ws/install/dobot_gesture_control/share/ament_index/resource_index
+[0.674s] creating /home/ssafy/final_ws/install/dobot_gesture_control/share/ament_index/resource_index/packages
+[0.674s] copying resource/dobot_gesture_control -> /home/ssafy/final_ws/install/dobot_gesture_control/share/ament_index/resource_index/packages
+[0.674s] copying package.xml -> /home/ssafy/final_ws/install/dobot_gesture_control/share/dobot_gesture_control
+[0.674s] creating /home/ssafy/final_ws/install/dobot_gesture_control/share/dobot_gesture_control/launch
+[0.674s] copying launch/full_system.launch.py -> /home/ssafy/final_ws/install/dobot_gesture_control/share/dobot_gesture_control/launch
+[0.674s] running install_egg_info
+[0.676s] Copying ../../build/dobot_gesture_control/dobot_gesture_control.egg-info to /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control-0.0.1-py3.10.egg-info
+[0.676s] running install_scripts
+[0.690s] writing list of installed files to '/home/ssafy/final_ws/build/dobot_gesture_control/install.log'
+[0.705s] Invoked command in '/home/ssafy/final_ws/src/dobot_gesture_control' returned '0': PYTHONPATH=/home/ssafy/final_ws/build/dobot_gesture_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/dobot_gesture_control build --build-base /home/ssafy/final_ws/build/dobot_gesture_control/build install --record /home/ssafy/final_ws/build/dobot_gesture_control/install.log --single-version-externally-managed install_data

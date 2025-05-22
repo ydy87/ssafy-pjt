@@ -1,0 +1,16 @@
+[0.460s] Invoking command in '/home/ssafy/final_ws/src/dobot_gesture_control': PYTHONPATH=/home/ssafy/final_ws/build/dobot_gesture_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/dobot_gesture_control build --build-base /home/ssafy/final_ws/build/dobot_gesture_control/build install --record /home/ssafy/final_ws/build/dobot_gesture_control/install.log --single-version-externally-managed install_data
+[0.645s] running egg_info
+[0.647s] writing manifest file '../../build/dobot_gesture_control/dobot_gesture_control.egg-info/SOURCES.txt'
+[0.647s] running build
+[0.647s] running build_py
+[0.647s] copying dobot_gesture_control/gesture_ptp_move.py -> /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+[0.648s] running install
+[0.648s] running install_lib
+[0.649s] byte-compiling /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control/gesture_ptp_move.py to gesture_ptp_move.cpython-310.pyc
+[0.650s] running install_data
+[0.650s] running install_egg_info
+[0.651s] removing '/home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control-0.0.1-py3.10.egg-info' (and everything under it)
+[0.651s] Copying ../../build/dobot_gesture_control/dobot_gesture_control.egg-info to /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control-0.0.1-py3.10.egg-info
+[0.652s] running install_scripts
+[0.666s] writing list of installed files to '/home/ssafy/final_ws/build/dobot_gesture_control/install.log'
+[0.682s] Invoked command in '/home/ssafy/final_ws/src/dobot_gesture_control' returned '0': PYTHONPATH=/home/ssafy/final_ws/build/dobot_gesture_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/dobot_gesture_control build --build-base /home/ssafy/final_ws/build/dobot_gesture_control/build install --record /home/ssafy/final_ws/build/dobot_gesture_control/install.log --single-version-externally-managed install_data

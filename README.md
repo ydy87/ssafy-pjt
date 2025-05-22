@@ -64,7 +64,7 @@
 | 노드명 | 기능 |
 |--------|------|
 | `gesture_bridge_node` | 웹소켓으로 수신한 제스처를 `/gesture_cmd` 토픽으로 publish |
-| `dobot_controller_node` | `/gesture_cmd`를 구독하여 두봇에 명령 전송 |
+| `dobot_ptp_move` | `/gesture_cmd`를 구독하여 두봇에 명령 전송 |
 | `conveyor_controller_node` | 로봇 동작 시 컨베이어 정지 및 재시작 제어 |
 | `state_dashboard_node` (선택) | 현재 상태를 웹 UI로 전달 (ROSBridge or REST API 사용 가능) |
 
