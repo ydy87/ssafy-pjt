@@ -5,6 +5,22 @@ from geometry_msgs.msg import Point
 import socket
 import threading
 import json
+import math
+
+def is_within_workspace(x, y, z):
+    # 중심에서의 거리 계산
+    distance = math.sqrt(x**2 + y**2)
+    
+    # 워크스페이스 범위 설정
+    max_radius = 320  # mm
+    min_z = 0         # mm
+    max_z = 150       # mm
+
+    # 거리와 Z축 범위 확인
+    if distance <= max_radius and min_z <= z <= max_z:
+        return True
+    else:
+        return False
 
 class GestureTCPBridgeNode(Node):
     def __init__(self):
@@ -18,7 +34,7 @@ class GestureTCPBridgeNode(Node):
         self.server_thread.start()
 
     def start_tcp_server(self):
-        HOST = '192.168.110.116'
+        HOST = '192.168.110.121'
         PORT = 8765
 
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -44,11 +60,17 @@ class GestureTCPBridgeNode(Node):
                             if message.startswith('{') and 'x' in message and 'y' in message:
                                 pos = json.loads(message)
                                 point = Point()
-                                point.x = float(pos['x']) * 200 + 100    # 100~300 mm
-                                point.y = float(pos['y']) * 200 - 100   # -100~100 mm
+                                point.y = 320- ((float(pos['y']) - 0.03) * 600) / 0.9
+                                point.x = 300 - ((float(pos['x']) -0.065) * 420) / 0.865
                                 point.z = 100.0
-                                self.hand_pub.publish(point)
-                                self.get_logger().info(f"Published /hand_position: {point}")
+                                # 워크스페이스 체크
+                                if is_within_workspace(point.x, point.y, point.z):
+                                    self.hand_pub.publish(point)
+                                    self.get_logger().info(f"✅ Published /hand_position: {point}")
+                                else:
+                                    error_msg = f"❌ Out of workspace: ({point.x:.2f}, {point.y:.2f}, {point.z:.2f})"
+                                    self.get_logger().error(error_msg)
+                                    self.error_pub.publish(String(data=error_msg))
                             else:
                                 msg = String()
                                 msg.data = message

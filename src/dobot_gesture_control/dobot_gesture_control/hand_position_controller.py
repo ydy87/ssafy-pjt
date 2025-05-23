@@ -69,10 +69,10 @@ class GestureBasedPTPMove(Node):
         elif code == '2':
             self.current_pose[2] += self.step
         elif code == '3':
-            self.control_suction(True)
+            self.control_suction(False)
             return
         elif code == '4':
-            self.control_suction(False)
+            self.control_suction(True)
             return
         else:
             self.get_logger().warn(f'Unknown gesture code: {code}')
