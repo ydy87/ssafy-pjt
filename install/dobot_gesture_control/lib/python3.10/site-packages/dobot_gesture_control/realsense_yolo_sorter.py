@@ -35,7 +35,7 @@ class RealSenseYoloNode(Node):
 
         # 소켓 연결 설정
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.connect(('192.168.110.146', 9999))
+        self.sock.connect(('192.168.110.146', 8765))
 
     def get_color_name(self, hsv_color):
         h, s, v = hsv_color

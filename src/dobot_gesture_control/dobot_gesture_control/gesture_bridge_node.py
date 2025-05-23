@@ -1,13 +1,16 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
+from geometry_msgs.msg import Point
 import socket
 import threading
+import json
 
 class GestureTCPBridgeNode(Node):
     def __init__(self):
         super().__init__('gesture_tcp_bridge_node')
         self.publisher_ = self.create_publisher(String, '/gesture_cmd', 10)
+        self.hand_pub = self.create_publisher(Point, '/hand_position', 10)
         self.get_logger().info("Gesture TCP Bridge Node started.")
 
         # TCP 서버 시작 (백그라운드 스레드)
@@ -19,9 +22,7 @@ class GestureTCPBridgeNode(Node):
         PORT = 8765
 
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            # 포트 재사용 허용
             s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
             try:
                 s.bind((HOST, PORT))
                 s.listen(1)
@@ -38,9 +39,21 @@ class GestureTCPBridgeNode(Node):
                         try:
                             message = data.decode('utf-8').strip()
                             self.get_logger().info(f"Received from client: {message}")
-                            msg = String()
-                            msg.data = message
-                            self.publisher_.publish(msg)
+
+                            # 좌표 메시지인지 제스처 문자열인지 분기 처리
+                            if message.startswith('{') and 'x' in message and 'y' in message:
+                                pos = json.loads(message)
+                                point = Point()
+                                point.x = float(pos['x']) * 200 + 100    # 100~300 mm
+                                point.y = float(pos['y']) * 200 - 100   # -100~100 mm
+                                point.z = 100.0
+                                self.hand_pub.publish(point)
+                                self.get_logger().info(f"Published /hand_position: {point}")
+                            else:
+                                msg = String()
+                                msg.data = message
+                                self.publisher_.publish(msg)
+                                self.get_logger().info(f"Published /gesture_cmd: {msg.data}")
                         except Exception as e:
                             self.get_logger().error(f"Decoding/publish error: {e}")
             except OSError as e:
@@ -51,7 +64,6 @@ class GestureTCPBridgeNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = GestureTCPBridgeNode()
-
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
