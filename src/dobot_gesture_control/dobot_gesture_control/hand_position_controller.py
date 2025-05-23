@@ -1,49 +1,99 @@
 import rclpy
 from rclpy.node import Node
-from geometry_msgs.msg import Point
 from rclpy.action import ActionClient
-from dobot_msgs.action import PointToPoint
 from rclpy.task import Future
+from std_msgs.msg import String
+from geometry_msgs.msg import Point
+from dobot_msgs.action import PointToPoint
+from dobot_msgs.srv import SuctionCupControl
 
-class HandPositionController(Node):
+class GestureBasedPTPMove(Node):
     def __init__(self):
-        super().__init__('hand_position_controller')
+        super().__init__('gesture_ptp_move_node')
 
-        self.subscription = self.create_subscription(
+        # Action client: PTP 이동
+        self._action_client = ActionClient(self, PointToPoint, 'PTP_action')
+
+        # Service client: 진공 흡착
+        self._suction_client = self.create_client(SuctionCupControl, 'dobot_suction_cup_service')
+
+        # 제스처 명령 구독
+        self.gesture_sub = self.create_subscription(
+            String,
+            '/gesture_cmd',
+            self.gesture_callback,
+            10
+        )
+
+        # XY 좌표 구독
+        self.position_sub = self.create_subscription(
             Point,
             '/hand_position',
-            self.listener_callback,
-            10)
+            self.position_callback,
+            10
+        )
 
-        self._action_client = ActionClient(self, PointToPoint, 'PTP_action')
-        self.current_pose = [150.0, 0.0, 100.0, 0.0]
+        # 상태 변수
+        self.current_pose = [150.0, 0.0, 100.0, 0.0]  # 초기 위치
+        self.step = 10.0  # Z축 이동 간격
         self.is_moving = False
+        self.next_command = None
 
-        self.get_logger().info('Hand position controller started.')
+        self.get_logger().info('Gesture-based PTP move node started.')
 
-    def listener_callback(self, msg: Point):
+    def gesture_callback(self, msg):
+        code = msg.data.strip()
+        self.get_logger().info(f'Gesture received: {code}')
+
+        if self.is_moving:
+            self.get_logger().warn('Dobot is moving, command delayed.')
+            self.next_command = code
+            return
+
+        self.handle_gesture(code)
+
+    def position_callback(self, msg: Point):
         if self.is_moving:
             self.get_logger().info('Dobot is moving. Ignoring current hand position.')
             return
 
         self.current_pose[0] = msg.x
         self.current_pose[1] = msg.y
-        self.current_pose[2] = msg.z  # 고정값이긴 하지만 확장 가능
+        # Z는 유지 (current_pose[2])
+
+        self.send_goal(self.current_pose.copy(), mode=1)
+
+    def handle_gesture(self, code):
+        if code == '1':
+            self.current_pose[2] -= self.step
+        elif code == '2':
+            self.current_pose[2] += self.step
+        elif code == '3':
+            self.control_suction(True)
+            return
+        elif code == '4':
+            self.control_suction(False)
+            return
+        else:
+            self.get_logger().warn(f'Unknown gesture code: {code}')
+            return
 
         self.send_goal(self.current_pose.copy(), mode=1)
 
     def send_goal(self, target, mode):
         self.is_moving = True
-        self.get_logger().info(f'Sending goal: {target}')
-
+        self.get_logger().info('Waiting for action server...')
         self._action_client.wait_for_server()
+
         goal_msg = PointToPoint.Goal()
         goal_msg.target_pose = target
         goal_msg.motion_type = mode
 
+        self.get_logger().info(f'Sending goal: {target}')
         self._send_goal_future = self._action_client.send_goal_async(
             goal_msg,
-            feedback_callback=self.feedback_callback)
+            feedback_callback=self.feedback_callback
+        )
         self._send_goal_future.add_done_callback(self.goal_response_callback)
 
     def goal_response_callback(self, future: Future):
@@ -62,13 +112,30 @@ class HandPositionController(Node):
         self.get_logger().info(f'Result: {result}')
         self.is_moving = False
 
+        if self.next_command:
+            code = self.next_command
+            self.next_command = None
+            self.get_logger().info(f'Executing delayed command: {code}')
+            self.handle_gesture(code)
+
     def feedback_callback(self, feedback):
         self.get_logger().info(f'Feedback: {feedback.feedback.current_pose}')
 
+    def control_suction(self, enable: bool):
+        if not self._suction_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().warn('Suction service not available.')
+            return
+
+        request = SuctionCupControl.Request()
+        request.enable_suction = enable
+
+        future = self._suction_client.call_async(request)
+        future.add_done_callback(lambda f: self.get_logger().info(
+            f'Suction cup {"ON" if enable else "OFF"}'))
 
 def main(args=None):
     rclpy.init(args=args)
-    node = HandPositionController()
+    node = GestureBasedPTPMove()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
