@@ -1,0 +1,161 @@
+:root {
+  --bg: #0b0d12;
+  --card: rgba(28, 31, 43, 0.9);
+  --text: #eaf7ff;
+  --accent: #66f2c5;
+  --accent-dark: #3dd0a2;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --radius: 16px;
+  --border: rgba(102, 242, 197, 0.15);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-wrapper {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dashboard-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+}
+.dashboard-row .card {
+  flex: 1;
+  min-width: 0;
+  height: 400px;
+}
+
+/* 헤더 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card);
+  padding: 1.5rem 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.status-indicators span {
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.status-ok {
+  color: var(--accent);
+}
+.status-bad {
+  color: #ff6e6e;
+}
+
+/* 공통 카드 스타일 */
+.card {
+  background: var(--card);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  transition: 0.3s ease;
+  overflow: visible; /* ✅ 넘침 허용 */
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(102, 242, 197, 0.15);
+}
+.card h2,
+.card h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--accent);
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+/* 차트 영역 */
+.chart-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  padding-top: 1rem;
+}
+
+.chart-box canvas {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 100%;
+  flex: 1;
+}
+
+/* 컨트롤 버튼 */
+.control-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+.control-panel button {
+  background-color: var(--accent);
+  color: #12121a;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(102, 242, 197, 0.2);
+  transition: background 0.2s, transform 0.2s;
+  min-width: 200px;
+  text-align: center;
+}
+.control-panel button:hover {
+  background-color: var(--accent-dark);
+  transform: scale(1.05);
+}
+
+/* 음성 명령 / GPT 응답 카드 높이 */
+.dashboard-row .card.voice-section,
+.dashboard-row .card.gpt-section {
+  height: 100px;
+}
+
+/* 로그 */
+.log-section {
+  margin-bottom: 3rem;
+}
+.log-section ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 1rem;
+}
+.log-section li {
+  font-size: 0.9rem;
+  color: #b0bec5;
+  line-height: 1.6;
+}
+
+/* 음성 인식 버튼 */
+.voice-section button {
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
