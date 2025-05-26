@@ -36,7 +36,7 @@ MediaPipe 기반 손 제스처와 Web UI, 음성(GPT), YOLO 객체 인식을 통
 ---
 ## 🧭 시스템 구성도
 
-https://github.com/user-attachments/assets/3136fc65-dcde-41e5-a03d-e975f4b25b1b)
+![git readme image-001](https://github.com/user-attachments/assets/3136fc65-dcde-41e5-a03d-e975f4b25b1b)
 ## 🔧 주요 기술 구성 요소
 
 | 항목 | 기술 스택 | 비고 |
