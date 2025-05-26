@@ -1,6 +1,7 @@
 [console_scripts]
 conveyor_controller_node = dobot_gesture_control.conveyor_controller_node:main
 gesture_bridge_node = dobot_gesture_control.gesture_bridge_node:main
+gesture_bridge_node_test = dobot_gesture_control.gesture_bridge_node_test:main
 gesture_ptp_move = dobot_gesture_control.gesture_ptp_move:main
 realsense_yolo_sorter = dobot_gesture_control.realsense_yolo_sorter:main
 

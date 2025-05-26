@@ -9,10 +9,13 @@ setup.py
 ../../build/dobot_gesture_control/dobot_gesture_control.egg-info/top_level.txt
 ../../build/dobot_gesture_control/dobot_gesture_control.egg-info/zip-safe
 dobot_gesture_control/__init__.py
-dobot_gesture_control/conveyor_controller_node.py
 dobot_gesture_control/gesture_bridge_node.py
+dobot_gesture_control/gesture_bridge_node_test.py
 dobot_gesture_control/gesture_ptp_move.py
+dobot_gesture_control/hand_position_controller.py
+dobot_gesture_control/realsense_hand_publisher.py
 dobot_gesture_control/realsense_yolo_sorter.py
+dobot_gesture_control/test.py
 launch/full_system.launch.py
 resource/dobot_gesture_control
 test/test_copyright.py

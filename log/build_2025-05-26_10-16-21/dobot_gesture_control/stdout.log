@@ -1,0 +1,22 @@
+running egg_info
+writing manifest file '../../build/dobot_gesture_control/dobot_gesture_control.egg-info/SOURCES.txt'
+running build
+running build_py
+copying dobot_gesture_control/gesture_bridge_node_test.py -> /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+copying dobot_gesture_control/test.py -> /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+copying dobot_gesture_control/hand_position_controller.py -> /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+copying dobot_gesture_control/gesture_bridge_node.py -> /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+copying dobot_gesture_control/realsense_hand_publisher.py -> /home/ssafy/final_ws/build/dobot_gesture_control/build/lib/dobot_gesture_control
+running install
+running install_lib
+byte-compiling /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control/gesture_bridge_node_test.py to gesture_bridge_node_test.cpython-310.pyc
+byte-compiling /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control/test.py to test.cpython-310.pyc
+byte-compiling /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control/hand_position_controller.py to hand_position_controller.cpython-310.pyc
+byte-compiling /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control/gesture_bridge_node.py to gesture_bridge_node.cpython-310.pyc
+byte-compiling /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control/realsense_hand_publisher.py to realsense_hand_publisher.cpython-310.pyc
+running install_data
+running install_egg_info
+removing '/home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control-0.0.1-py3.10.egg-info' (and everything under it)
+Copying ../../build/dobot_gesture_control/dobot_gesture_control.egg-info to /home/ssafy/final_ws/install/dobot_gesture_control/lib/python3.10/site-packages/dobot_gesture_control-0.0.1-py3.10.egg-info
+running install_scripts
+writing list of installed files to '/home/ssafy/final_ws/build/dobot_gesture_control/install.log'

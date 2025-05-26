@@ -6,7 +6,6 @@ from std_msgs.msg import String
 from geometry_msgs.msg import Point
 from dobot_msgs.action import PointToPoint
 from dobot_msgs.srv import SuctionCupControl
-from dobot_msgs.srv import ExecuteHomingProcedure
 
 class GestureBasedPTPMove(Node):
     def __init__(self):
@@ -14,7 +13,6 @@ class GestureBasedPTPMove(Node):
 
         # Action client: PTP 이동
         self._action_client = ActionClient(self, PointToPoint, 'PTP_action')
-        self._homing_client = self.create_client(ExecuteHomingProcedure, 'dobot_homing_service')
 
         # Service client: 진공 흡착
         self._suction_client = self.create_client(SuctionCupControl, 'dobot_suction_cup_service')
@@ -76,55 +74,12 @@ class GestureBasedPTPMove(Node):
         elif code == '4':
             self.control_suction(True)
             return
-        elif code == '7':
-            self.homing()
-            return
         else:
             self.get_logger().warn(f'Unknown gesture code: {code}')
             return
 
         self.send_goal(self.current_pose.copy(), mode=1)
 
-    def homing(self):
-        if self.is_moving:
-            self.get_logger().warn('Already moving, homing delayed.')
-            self.next_command = '7'
-            return
-
-        if not self._homing_client.wait_for_service(timeout_sec=2.0):
-            self.get_logger().error('Homing service not available.')
-            return
-
-        self.get_logger().info('Requesting Dobot homing procedure...')
-        req = ExecuteHomingProcedure.Request()
-        future = self._homing_client.call_async(req)
-
-        self.is_moving = True  # Homing 중 상태로 전환
-
-        def homing_done_callback(fut):
-            try:
-                result = fut.result()
-                if hasattr(result, 'success') and result.success:
-                    self.get_logger().info('✅ Homing completed successfully!')
-                    # 홈 위치로 상태 초기화 (필요 시 조정)
-                    self.current_pose = [200.0, 0.0, 50.0, 0.0]
-                else:
-                    self.get_logger().warn(f'⚠️ Homing finished, but failed or unknown status: {result}')
-            except Exception as e:
-                self.get_logger().error(f'Homing service call failed: {e}')
-            finally:
-                self.is_moving = False
-                # 다음 명령이 대기 중이었다면 처리
-                if self.next_command:
-                    code = self.next_command
-                    self.next_command = None
-                    self.get_logger().info(f'Executing delayed command: {code}')
-                    self.handle_gesture(code)
-
-        future.add_done_callback(homing_done_callback)
-        # 이후 콜백 등에서 완료 신호 처리
-
-        
     def send_goal(self, target, mode):
         self.is_moving = True
         self.get_logger().info('Waiting for action server...')

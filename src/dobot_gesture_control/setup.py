@@ -31,6 +31,7 @@ setup(
             'gesture_bridge_node = dobot_gesture_control.gesture_bridge_node:main',
             'conveyor_controller_node = dobot_gesture_control.conveyor_controller_node:main',
             'realsense_yolo_sorter = dobot_gesture_control.realsense_yolo_sorter:main',
+            'gesture_bridge_node_test = dobot_gesture_control.gesture_bridge_node_test:main',
         ],
     },
 )
