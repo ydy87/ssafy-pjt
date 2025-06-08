@@ -6,8 +6,8 @@
 **목표**  
 MediaPipe 기반 손 제스처와 Web UI, 음성(GPT), YOLO 객체 인식을 통합하여 Dobot Magician을 ROS2로 제어하는 실시간 로봇 제어 시스템 구현
 
-**기간**  
-4일
+**프로젝트 내용**  
+https://kje012-my.sharepoint.com/:p:/g/personal/2019265086_office_hknu_ac_kr/Ef9GwMy1mbFOoeziUaztCyMBVrrPzB7y4NBedC2EJjVvzQ?e=txqNrv
 
 ---
 
